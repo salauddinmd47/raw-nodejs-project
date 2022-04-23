@@ -2,27 +2,33 @@
 //  description:'It is mainly testing for client providing api up or down',
 //  Author:'Md Salauddin (MERN Stack Developer)',
 
-const http = require('http')
+const http = require('http');
+const environment  = require('./helpers/environments');
+const {handleReqAndRes} = require('./helpers/handleReqAndRes')
+const data = require('./lib/data')
 
 // application object 
 const app = {}
 
-// configuration 
-app.config={
-     port:4000
-}
+// testing file system 
+// @TODO erased will be later 
+
+// data.delete('test','newFile',  (err )=>{
+//     console.log(err )
+// })
 
 // server creation 
 
 app.createServer = ()=>{
     const server = http.createServer(app.handleReqAndRes);
-    server.listen(app.config.port, ()=>{
-        console.log(`Server running on port ${app.config.port}`)
+    server.listen( environment.port,  ()=>{ 
+        console.log(`Server running on port ${environment.port}`)
     })
 }
 
-app.handleReqAndRes= (req, res)=>{
-    res.end("Hello programers what the hell are you doing")
-}
 
+// handle req and res 
+app.handleReqAndRes= handleReqAndRes
+
+// start server 
 app.createServer()
